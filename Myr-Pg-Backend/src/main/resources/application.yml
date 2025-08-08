@@ -23,10 +23,7 @@ spring:
     properties:
       security.protocol: ${SPRING_KAFKA_PROPERTIES_SECURITY_PROTOCOL}
       sasl.mechanism: ${SPRING_KAFKA_PROPERTIES_SASL_MECHANISM}
-      sasl.jaas.config: >
-        org.apache.kafka.common.security.plain.PlainLoginModule required
-        username="${KAFKA_USERNAME}"
-        password="${KAFKA_PASSWORD}";
+      sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${KAFKA_USERNAME}\" password=\"${KAFKA_PASSWORD}\";"
     consumer:
       group-id: ${SPRING_KAFKA_CONSUMER_GROUP_ID}
       auto-offset-reset: earliest

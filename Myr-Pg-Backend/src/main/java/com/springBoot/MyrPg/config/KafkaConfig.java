@@ -14,8 +14,9 @@ public class KafkaConfig {
         return TopicBuilder
                 .name(AppConstant.NEW_STUDENT_TOPIC)
                 .partitions(1)
-                .replicas(1)
+                .replicas(3)
                 .build();
+
     }
 
     //bin\windows\kafka-server-start.bat config\kraft\server.properties

@@ -15,7 +15,6 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
 
     @Override
     @KafkaListener(topics =AppConstant.NEW_STUDENT_TOPIC, groupId =AppConstant.STUDENT_GROUP_ID)
-
     public void consumeNewStudentNotification(String message) {
         System.out.println(" Kafka message received: " + message);
 

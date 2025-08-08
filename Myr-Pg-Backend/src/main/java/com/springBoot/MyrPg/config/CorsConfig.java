@@ -10,7 +10,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173") // or "http://localhost:3000" during dev
+                .allowedOrigins("https://satyaa-pg.netlify.app") // or "http://localhost:3000" during dev
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);//ui to backend send request

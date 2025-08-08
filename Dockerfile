@@ -1,23 +1,18 @@
-#
-# # Build stage
-# FROM eclipse-temurin:21-jdk AS build
-# WORKDIR /app
-# COPY . .
-# RUN ./mvnw clean package -DskipTests
-#
-# # Run stage
-# FROM eclipse-temurin:21-jdk
-# WORKDIR /app
-# COPY --from=build /app/Myr-Pg-Backend/target/Myr-Pg-Backend-0.0.1-SNAPSHOT.jar app.jar
-# EXPOSE 8080
-# ENTRYPOINT ["java", "-jar", "app.jar"]
 
+# Use OpenJDK as base
+FROM openjdk:17
 
-FROM maven:3.9.6-eclipse-temurin-21
-
+# Set working directory
 WORKDIR /app
-COPY . .
 
-RUN mvn clean package -DskipTests
+# Copy Spring Boot project from Myr-Pg-Backend folder
+COPY Myr-Pg-Backend /app
 
-CMD ["java", "-jar", "target/your-app-name.jar"]
+# Give execute permission to mvnw
+RUN chmod +x mvnw
+
+# Build the project
+RUN ./mvnw clean package -DskipTests
+
+# Run the application
+CMD ["java", "-jar", "target/<your-jar-name>.jar"]

@@ -1,26 +1,3 @@
-#envVars:
-#  - key: SPRING_DATASOURCE_URL
-#    value: jdbc:postgresql://dpg-d2aop8adbo4c73a3c3qg-a.oregon-postgres.render.com:5432/myrpg
-#  - key: SPRING_DATASOURCE_USERNAME
-#    value: myrpg_user
-#  - key: SPRING_DATASOURCE_PASSWORD
-#    value: lBxsoLQOEvng9JeiQHkC1Z396VwtUmuN
-#
-#  # Kafka-related environment variables
-#  - key: SPRING_KAFKA_BOOTSTRAP_SERVERS
-#    value: pkc-921jm.us-east-2.aws.confluent.cloud:9092
-#  - key: SPRING_KAFKA_PROPERTIES_SECURITY_PROTOCOL
-#    value: SASL_SSL
-#  - key: SPRING_KAFKA_PROPERTIES_SASL_MECHANISM
-#    value: PLAIN
-#  - key: KAFKA_USERNAME
-#    value: JKHUMDHIWHPXLVZM
-#  - key: KAFKA_PASSWORD
-#    value: cfltkyXIp+oUlvnUj4uxC6DLkObQdw5VmuNbwy4bChwkY20leXtcx93FZmW/H8iQ
-#  - key: SPRING_KAFKA_CONSUMER_GROUP_ID
-#    value: pg-admin-group
-
-
 
 services:
   - type: web

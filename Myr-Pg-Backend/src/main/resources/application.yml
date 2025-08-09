@@ -1,8 +1,59 @@
+#spring:
+#  datasource:
+#    url: ${SPRING_DATASOURCE_URL}?sslmode=require
+#    username: ${SPRING_DATASOURCE_USERNAME}
+#    password: ${SPRING_DATASOURCE_PASSWORD}
+#    driver-class-name: org.postgresql.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#
+#  servlet:
+#    multipart:
+#      max-file-size: 10MB
+#      max-request-size: 10MB
+#
+#  kafka:
+#    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+#    properties:
+#      security.protocol: ${SPRING_KAFKA_PROPERTIES_SECURITY_PROTOCOL}
+#      sasl.mechanism: ${SPRING_KAFKA_PROPERTIES_SASL_MECHANISM}
+#      sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${KAFKA_USERNAME}\" password=\"${KAFKA_PASSWORD}\";"
+#    consumer:
+#      group-id: ${SPRING_KAFKA_CONSUMER_GROUP_ID}
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#
+#logging:
+#  level:
+#    root: INFO
+#    org.springframework.kafka: INFO
+#    com.springBoot.MyrPg: DEBUG
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#
+#
+#
+#
+
+
+
+
+
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}?sslmode=require
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://dpg-d2aop8adbo4c73a3c3qg-a.oregon-postgres.render.com:5432/myrpg
+    username: myrpg_user
+    password: lBxsoLQOEvng9JeiQHkC1Z396VwtUmuN
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -18,14 +69,19 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
+
+
   kafka:
-    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+    bootstrap-servers: pkc-921jm.us-east-2.aws.confluent.cloud:9092
     properties:
-      security.protocol: ${SPRING_KAFKA_PROPERTIES_SECURITY_PROTOCOL}
-      sasl.mechanism: ${SPRING_KAFKA_PROPERTIES_SASL_MECHANISM}
-      sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${KAFKA_USERNAME}\" password=\"${KAFKA_PASSWORD}\";"
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: >
+        org.apache.kafka.common.security.plain.PlainLoginModule required
+        username="JKHUMDHIWHPXLVZM"
+        password="cfltkyXIp+oUlvnUj4uxC6DLkObQdw5VmuNbwy4bChwkY20leXtcx93FZmW/H8iQ";
     consumer:
-      group-id: ${SPRING_KAFKA_CONSUMER_GROUP_ID}
+      group-id: pg-admin-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -33,14 +89,13 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
+myrpg:
+  websocket:
+    allowed-origins:
+      - https://satyaa-pg.netlify.app
+
 logging:
   level:
     root: INFO
     org.springframework.kafka: INFO
     com.springBoot.MyrPg: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
-
-
-

@@ -21,7 +21,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry
                 .addEndpoint("/ws")//call from ui using this end point
-                .setAllowedOrigins("https://satyaa-pg.netlify.app")//ui url
+                .setAllowedOrigins("https://satyaa-pg.netlify.app" ,  "http://localhost:5173")//ui url
                 .withSockJS();//
     }
 }

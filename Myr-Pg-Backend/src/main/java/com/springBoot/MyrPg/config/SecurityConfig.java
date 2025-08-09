@@ -22,12 +22,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @RequiredArgsConstructor
 @EnableMethodSecurity//for rol based auth
+
 public class SecurityConfig {
     private final JwtHelper helper;
     private final JwtFilter filter;
     private final JwtEntryPoint jwtEntryPoint;
     private final CustomUserDetailService userDetailService;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -39,6 +39,7 @@ public class SecurityConfig {
                         // Public endpoints
 //                        .requestMatchers("/auth/register", "/auth/login").permitAll()
                                 .requestMatchers("/auth/register", "/auth/login").permitAll()
+                                .requestMatchers("/api/pg/**").permitAll()
                                 .requestMatchers("/ws/**", "/topic/**", "/api/ws/send").permitAll()
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()//for download file //when ui triggered Download button it s mandatory http option
                         // Any other endpoint requires authentication

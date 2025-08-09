@@ -15,6 +15,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pg")
+@CrossOrigin(origins = {"https://satyaa-pg.netlify.app", "http://localhost:5173"})
+//@CrossOrigin(origins = "https://satyaa-pg.netlify.app" )
 @RequiredArgsConstructor
 public class StudentController {
 

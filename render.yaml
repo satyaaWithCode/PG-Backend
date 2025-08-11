@@ -28,3 +28,11 @@ services:
         value: 9JLFNWR7Q8MK82J1F5CF
       - key: WASABI_SECRET_KEY
         value: dAnMhryQ9wG2viPP5s33kB2k3jeuDoYuhdpJXPr5
+      - key: WASABI_REGION
+        value: us-east-1
+      - key: WASABI_BUCKET_NAME
+        value: pg-uploads
+      - key: WASABI_ENDPOINT
+        value: https://s3.wasabisys.com
+
+

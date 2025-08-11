@@ -49,6 +49,11 @@ myrpg:
 wasabi:
   access-key: ${WASABI_ACCESS_KEY}
   secret-key: ${WASABI_SECRET_KEY}
+  region: ${WASABI_REGION}
+  bucket-name: ${WASABI_BUCKET_NAME}
+  endpoint: https://s3.wasabisys.com
+
+
 
 #
 #spring:
@@ -105,3 +110,6 @@ wasabi:
 #wasabi:
 #  access-key: 9JLFNWR7Q8MK82J1F5CF
 #  secret-key: dAnMhryQ9wG2viPP5s33kB2k3jeuDoYuhdpJXPr5
+#  region: us-east-1
+#  bucket-name: pg-uploads
+#  endpoint: https://s3.wasabisys.com

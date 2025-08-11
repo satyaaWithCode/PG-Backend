@@ -23,7 +23,8 @@ public class FileServiceImpl implements FileService {
 
     private S3Presigner s3Presigner;
 
-    private final String bucketName = "pg-uploads";
+    @Value("${wasabi.bucket-name}")
+    private String bucketName;
 
     @Value("${wasabi.access-key}")
     private String accessKey;
@@ -31,13 +32,18 @@ public class FileServiceImpl implements FileService {
     @Value("${wasabi.secret-key}")
     private String secretKey;
 
-    private final String region = "us-east-1";
-    private final String endpoint = "https://s3.wasabisys.com";
+    @Value("${wasabi.region}")
+    private String region;
+
+    @Value("${wasabi.endpoint}")
+    private String endpoint;
 
     @PostConstruct
     public void init() {
-        AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
+        System.out.println("Wasabi Access Key: " + accessKey);
+        System.out.println("Wasabi Secret Key: " + (secretKey != null ? "Loaded" : "NULL"));
 
+        AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
         s3Presigner = S3Presigner.builder()
                 .endpointOverride(URI.create(endpoint))
                 .region(Region.of(region))

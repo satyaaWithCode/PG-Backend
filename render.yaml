@@ -24,3 +24,7 @@ services:
         value: cfltkyXIp+oUlvnUj4uxC6DLkObQdw5VmuNbwy4bChwkY20leXtcx93FZmW/H8iQ
       - key: SPRING_KAFKA_CONSUMER_GROUP_ID
         value: pg-admin-group
+      - key: WASABI_ACCESS_KEY
+        value: 9JLFNWR7Q8MK82J1F5CF
+      - key: WASABI_SECRET_KEY
+        value: dAnMhryQ9wG2viPP5s33kB2k3jeuDoYuhdpJXPr5

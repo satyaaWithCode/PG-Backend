@@ -1,34 +1,68 @@
 package com.springBoot.MyrPg.service.impl;
 
 import com.springBoot.MyrPg.service.FileService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
+import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 
-import java.io.IOException;
-import java.nio.file.Path;
+import java.net.URI;
+import java.time.Duration;
 
 @Service
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
 
-    private final Path uploadsDir;
+    private S3Presigner s3Presigner;
 
+    private final String bucketName = "pg-uploads";
+
+    @Value("${wasabi.access-key}")
+    private String accessKey;
+
+    @Value("${wasabi.secret-key}")
+    private String secretKey;
+
+    private final String region = "us-east-1";
+    private final String endpoint = "https://s3.wasabisys.com";
+
+    @PostConstruct
+    public void init() {
+        AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
+
+        s3Presigner = S3Presigner.builder()
+                .endpointOverride(URI.create(endpoint))
+                .region(Region.of(region))
+                .credentialsProvider(StaticCredentialsProvider.create(credentials))
+                .build();
+    }
 
     @Override
-    public Resource loadFile(String filename) throws IOException {
-        Path filePath = uploadsDir.resolve(filename).normalize(); //get aadhar card if not valid if block will execute
+    public Resource loadFile(String filename) {
+        throw new UnsupportedOperationException("Local file loading not supported. Use generatePresignedUrl instead.");
+    }
 
-        if (!filePath.startsWith(uploadsDir)) {
-            throw new IllegalArgumentException("Invalid file path.");
-        }
+    @Override
+    public String generatePresignedUrl(String filename) {
+        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                .bucket(bucketName)
+                .key(filename)
+                .build();
 
-        Resource resource = new UrlResource(filePath.toUri());
-        if (!resource.exists()) {
-            throw new IOException("File not found: " + filename);
-        }
+        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(Duration.ofMinutes(10))
+                .getObjectRequest(getObjectRequest)
+                .build();
 
-        return resource;
+        PresignedGetObjectRequest presignedRequest = s3Presigner.presignGetObject(presignRequest);
+        return presignedRequest.url().toString();
     }
 }

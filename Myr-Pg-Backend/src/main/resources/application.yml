@@ -1,62 +1,8 @@
-spring:
-  datasource:
-    url: ${SPRING_DATASOURCE_URL}?sslmode=require
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-
-  kafka:
-    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
-    properties:
-      security.protocol: ${SPRING_KAFKA_PROPERTIES_SECURITY_PROTOCOL}
-      sasl.mechanism: ${SPRING_KAFKA_PROPERTIES_SASL_MECHANISM}
-      sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${KAFKA_USERNAME}\" password=\"${KAFKA_PASSWORD}\";"
-    consumer:
-      group-id: ${SPRING_KAFKA_CONSUMER_GROUP_ID}
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
-logging:
-  level:
-    root: INFO
-    org.springframework.kafka: INFO
-    com.springBoot.MyrPg: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
-myrpg:
-  websocket:
-    allowed-origins:
-      - https://satyaa-pg.netlify.app
-
-
-
-
-
-
-#
 #spring:
 #  datasource:
-#    url: jdbc:postgresql://dpg-d2aop8adbo4c73a3c3qg-a.oregon-postgres.render.com:5432/myrpg
-#    username: myrpg_user
-#    password: lBxsoLQOEvng9JeiQHkC1Z396VwtUmuN
+#    url: ${SPRING_DATASOURCE_URL}?sslmode=require
+#    username: ${SPRING_DATASOURCE_USERNAME}
+#    password: ${SPRING_DATASOURCE_PASSWORD}
 #    driver-class-name: org.postgresql.Driver
 #
 #  jpa:
@@ -72,19 +18,14 @@ myrpg:
 #      max-file-size: 10MB
 #      max-request-size: 10MB
 #
-#
-#
 #  kafka:
-#    bootstrap-servers: pkc-921jm.us-east-2.aws.confluent.cloud:9092
+#    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
 #    properties:
-#      security.protocol: SASL_SSL
-#      sasl.mechanism: PLAIN
-#      sasl.jaas.config: >
-#        org.apache.kafka.common.security.plain.PlainLoginModule required
-#        username="JKHUMDHIWHPXLVZM"
-#        password="cfltkyXIp+oUlvnUj4uxC6DLkObQdw5VmuNbwy4bChwkY20leXtcx93FZmW/H8iQ";
+#      security.protocol: ${SPRING_KAFKA_PROPERTIES_SECURITY_PROTOCOL}
+#      sasl.mechanism: ${SPRING_KAFKA_PROPERTIES_SASL_MECHANISM}
+#      sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${KAFKA_USERNAME}\" password=\"${KAFKA_PASSWORD}\";"
 #    consumer:
-#      group-id: pg-admin-group
+#      group-id: ${SPRING_KAFKA_CONSUMER_GROUP_ID}
 #      auto-offset-reset: earliest
 #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 #      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -92,13 +33,75 @@ myrpg:
 #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 #
-#myrpg:
-#  websocket:
-#    allowed-origins:
-#      - https://satyaa-pg.netlify.app
-#
 #logging:
 #  level:
 #    root: INFO
 #    org.springframework.kafka: INFO
 #    com.springBoot.MyrPg: DEBUG
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#
+#myrpg:
+#  websocket:
+#    allowed-origins:
+#      - https://satyaa-pg.netlify.app
+#
+#wasabi:
+#  access-key: ${WASABI_ACCESS_KEY}
+#  secret-key: ${WASABI_SECRET_KEY}
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-d2aop8adbo4c73a3c3qg-a.oregon-postgres.render.com:5432/myrpg
+    username: myrpg_user
+    password: lBxsoLQOEvng9JeiQHkC1Z396VwtUmuN
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+
+  kafka:
+    bootstrap-servers: pkc-921jm.us-east-2.aws.confluent.cloud:9092
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: >
+        org.apache.kafka.common.security.plain.PlainLoginModule required
+        username="JKHUMDHIWHPXLVZM"
+        password="cfltkyXIp+oUlvnUj4uxC6DLkObQdw5VmuNbwy4bChwkY20leXtcx93FZmW/H8iQ";
+    consumer:
+      group-id: pg-admin-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+myrpg:
+  websocket:
+    allowed-origins:
+      - https://satyaa-pg.netlify.app
+
+logging:
+  level:
+    root: INFO
+    org.springframework.kafka: INFO
+    com.springBoot.MyrPg: DEBUG
+
+wasabi:
+  access-key: 9JLFNWR7Q8MK82J1F5CF
+  secret-key: dAnMhryQ9wG2viPP5s33kB2k3jeuDoYuhdpJXPr5

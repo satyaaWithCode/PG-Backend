@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class KafkaController {
 
+    //render
+    //netifly
+    //wasabi
+    //confluent cloud
     private final KafkaProducerService kafkaProducerService;
 
     @PostMapping("/send-message")

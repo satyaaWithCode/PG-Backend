@@ -18,10 +18,18 @@ public class UploadPathConfig {
 //                .normalize();
 //    }
 
+//    @Bean
+//    public Path uploadsDir() {
+//        return Paths
+//                .get("F:/project/PG-Management-System/Myr-Pg-Backend/uploads/")
+//                .toAbsolutePath()
+//                .normalize();
+//    }
+
     @Bean
     public Path uploadsDir() {
         return Paths
-                .get("F:/project/PG-Management-System/Myr-Pg-Backend/uploads/")
+                .get("/app/uploads/")
                 .toAbsolutePath()
                 .normalize();
     }

@@ -5,6 +5,7 @@ FROM openjdk:17
 # Set working directory
 WORKDIR /app
 
+
 # Copy Spring Boot project from Myr-Pg-Backend folder
 COPY Myr-Pg-Backend /app
 
